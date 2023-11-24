@@ -1,0 +1,136 @@
+package com.example.myapplication.screens.overviewscreen
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.myapplication.R
+
+@Composable
+fun CoinOverviewScreen (
+    modifier: Modifier = Modifier,
+    coinUiState: CoinUiState
+) {
+    Column (
+        modifier = modifier.padding(horizontal = 20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(modifier = Modifier.height(30.dp))
+        Text(
+            text="Overview of cryptocoins",
+            textAlign = TextAlign.Center,
+            fontSize = 30.sp
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        when (coinUiState) {
+            is CoinUiState.Loading -> LoadingScreen()
+            is CoinUiState.Success -> Text(text=coinUiState.coins)
+            is CoinUiState.Error -> ErrorScreen()
+        }
+
+    }
+}
+
+@Composable
+fun CoinOverviewColumn (
+    modifier: Modifier = Modifier,
+    //coins:List<CryptoCoin>
+) {
+    /*
+    LazyColumn() {
+        items(coins) { item ->
+        }
+    }*/
+
+
+}
+@Composable
+fun CoinOverviewCard(
+    modifier: Modifier = Modifier,
+    coins:String = "niets"
+) {
+    Card (
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
+        modifier = Modifier
+            .height(130.dp)
+            .fillMaxWidth()
+    ){
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text="Bitcoin",
+            fontSize = 20.sp,
+            modifier = Modifier.padding(horizontal = 30.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Row (
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 30.dp)
+            ) {
+                Text(text="rank: 2")
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text="price: 3.44")
+            }
+            Column (
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    onClick = { }
+                ) {
+                    Text("More details")
+                }
+            }
+        }
+        Text(text=coins)
+    }
+}
+
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img),
+        contentDescription = stringResource(R.string.loading)
+    )
+}
+
+@Composable
+fun ErrorScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+        )
+        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+    }
+}

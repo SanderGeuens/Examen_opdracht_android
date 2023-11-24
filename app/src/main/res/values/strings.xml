@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="coin_overview_title">Coin overview</string>
+    <string name="coin_detail_title">Coin details</string>
+    <string name="coin_favorites_title">Your favorite coins</string>
+    <string name="loading_failed">Failed to load</string>
+    <string name="loading">Loading</string>
+</resources>
