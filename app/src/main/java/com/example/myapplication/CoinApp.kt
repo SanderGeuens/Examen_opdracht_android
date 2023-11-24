@@ -28,6 +28,7 @@ import com.example.myapplication.navigation.NavigationRoutes
 import com.example.myapplication.navigation.navidrawer.NavigationDrawer
 import com.example.myapplication.screens.detailscreen.CoinDetailScreen
 import com.example.myapplication.screens.favoritescreen.CoinFavoritesScreen
+import com.example.myapplication.screens.overviewscreen.CoinOverviewCard
 import com.example.myapplication.screens.overviewscreen.CoinOverviewScreen
 import com.example.myapplication.screens.overviewscreen.CoinOverviewViewModel
 import kotlinx.coroutines.coroutineScope
@@ -92,8 +93,8 @@ fun CoinApp (
                     modifier = Modifier.padding(innerPadding)
                 ){
                     composable(NavigationRoutes.CoinOverview.name) {
-                        //CoinOverviewScreen(coinApiState= coinOverviewViewModel.coinApiState)
-                        CoinOverviewScreen(coinUiState = coinOverviewViewModel.coinUiState)
+                        CoinOverviewScreen(coinUiState= coinOverviewViewModel.coinUiState)
+                        //CoinOverviewCard()
                     }
                     composable(NavigationRoutes.CoinDetail.name){
                         CoinDetailScreen()

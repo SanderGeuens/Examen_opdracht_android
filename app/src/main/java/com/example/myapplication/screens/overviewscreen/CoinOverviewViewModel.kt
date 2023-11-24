@@ -29,10 +29,12 @@ class CoinOverviewViewModel : ViewModel(){
 
             coinUiState = try {
                 val listResult = CoinApi.retrofitService.getCoins()
-                CoinUiState.Success(listResult.data.size.toString())
+                //CoinUiState.Success(listResult.data.size.toString())
+                CoinUiState.Success(listResult)
             }catch (e: IOException) {
                 CoinUiState.Error
             }
+
 
 
         }
