@@ -34,7 +34,7 @@ import java.math.RoundingMode
 @Composable
 fun CoinOverviewScreen (
     modifier: Modifier = Modifier,
-    coinOverviewViewModel: CoinOverviewViewModel = viewModel()
+    coinOverviewViewModel: CoinOverviewViewModel = viewModel(factory= CoinOverviewViewModel.Factory)
 ) {
 
     val coinUiState = coinOverviewViewModel.coinUiState
