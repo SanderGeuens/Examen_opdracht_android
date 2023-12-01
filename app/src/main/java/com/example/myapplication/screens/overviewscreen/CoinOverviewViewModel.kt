@@ -28,9 +28,9 @@ class CoinOverviewViewModel : ViewModel(){
         viewModelScope.launch {
 
             coinUiState = try {
-                val listResult = CoinApi.retrofitService.getCoins()
+                val result = CoinApi.retrofitService.getCoins().data.size.toString()
                 //CoinUiState.Success(listResult.data.size.toString())
-                CoinUiState.Success(listResult)
+                CoinUiState.Success(result)
             }catch (e: IOException) {
                 CoinUiState.Error
             }

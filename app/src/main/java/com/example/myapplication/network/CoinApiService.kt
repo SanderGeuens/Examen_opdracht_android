@@ -22,8 +22,8 @@ private val client = OkHttpClient.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(
-        ScalarsConverterFactory.create()
-    /*Json.asConverterFactory("application/json".toMediaType())*/
+        /*ScalarsConverterFactory.create()*/
+    Json.asConverterFactory("application/json".toMediaType())
     )
     .baseUrl(BASE_URL)
     .client(client)
@@ -31,7 +31,7 @@ private val retrofit = Retrofit.Builder()
 
 interface CoinApiService {
     @GET("assets")
-    suspend fun getCoins():String
+    suspend fun getCoins():CoinsResponse
 }
 
 object CoinApi {
