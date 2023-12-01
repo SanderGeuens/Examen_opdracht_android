@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,13 +24,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.R
+import com.example.myapplication.network.ApiCryptoCoin
+import java.math.RoundingMode
 
 @Composable
 fun CoinOverviewScreen (
     modifier: Modifier = Modifier,
-    coinUiState: CoinUiState
+    coinOverviewViewModel: CoinOverviewViewModel = viewModel()
 ) {
+
+    val coinUiState = coinOverviewViewModel.coinUiState
+
     Column (
         modifier = modifier.padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,7 +50,7 @@ fun CoinOverviewScreen (
         Spacer(modifier = Modifier.height(30.dp))
         when (coinUiState) {
             is CoinUiState.Loading -> LoadingScreen()
-            is CoinUiState.Success -> Text(text=coinUiState.coins)
+            is CoinUiState.Success -> CoinOverviewColumn(coins = coinUiState.coins)
             //CoinOverviewCard()
             is CoinUiState.Error -> ErrorScreen()
         }
@@ -54,38 +61,48 @@ fun CoinOverviewScreen (
 @Composable
 fun CoinOverviewColumn (
     modifier: Modifier = Modifier,
-    //coins:List<CryptoCoin>
+    coins:List<ApiCryptoCoin>
 ) {
-    /*
+
     LazyColumn() {
         items(coins) { item ->
+            Spacer(modifier = Modifier.height(height=10.dp))
+            CoinOverviewCard(name = item.name,rank = item.rank,price=item.priceUsd, modifier = Modifier.padding(horizontal = 20.dp))
+            Spacer(modifier = Modifier.height(height=10.dp))
         }
-    }*/
-
+    }
 
 }
 @Composable
 fun CoinOverviewCard(
     modifier: Modifier = Modifier,
-    coins:String = "niets"
+    name:String,
+    rank:String,
+    price:String,
 ) {
-    Card (
+
+    var priceDouble: Double = price.toDouble()
+    priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+
+
+    Card(
 
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
-        modifier = Modifier
+        modifier = modifier
             .height(130.dp)
             .fillMaxWidth()
-    ){
+    ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="Bitcoin",
+            text = name,
             fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(
@@ -93,11 +110,11 @@ fun CoinOverviewCard(
                     .weight(1f)
                     .padding(horizontal = 30.dp)
             ) {
-                Text(text="rank: 2")
+                Text(text = "rank: ${rank}")
                 Spacer(modifier = Modifier.height(10.dp))
-                Text(text="price: 3.44")
+                Text(text = "price: $priceDouble")
             }
-            Column (
+            Column(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -110,29 +127,29 @@ fun CoinOverviewCard(
                 }
             }
         }
-        Text(text=coins)
     }
 }
 
-@Composable
-fun LoadingScreen(modifier: Modifier = Modifier) {
-    Image(
-        modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.loading_img),
-        contentDescription = stringResource(R.string.loading)
-    )
-}
-
-@Composable
-fun ErrorScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    @Composable
+    fun LoadingScreen(modifier: Modifier = Modifier) {
         Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+            modifier = modifier.size(200.dp),
+            painter = painterResource(R.drawable.loading_img),
+            contentDescription = stringResource(R.string.loading)
         )
-        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
     }
-}
+
+    @Composable
+    fun ErrorScreen(modifier: Modifier = Modifier) {
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_connection_error),
+                contentDescription = ""
+            )
+            Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        }
+    }

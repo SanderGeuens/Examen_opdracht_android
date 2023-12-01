@@ -55,7 +55,7 @@ fun CoinApp (
             mutableIntStateOf(0)
         }
 
-        val coinOverviewViewModel: CoinOverviewViewModel = viewModel(/*factory= CoinOverviewViewModel.Factory*/)
+        //val coinOverviewViewModel: CoinOverviewViewModel = viewModel(/*factory= CoinOverviewViewModel.Factory*/)
 
 
 
@@ -93,7 +93,7 @@ fun CoinApp (
                     modifier = Modifier.padding(innerPadding)
                 ){
                     composable(NavigationRoutes.CoinOverview.name) {
-                        CoinOverviewScreen(coinUiState= coinOverviewViewModel.coinUiState)
+                        CoinOverviewScreen(/*coinUiState= coinOverviewViewModel.coinUiState*/)
                         //CoinOverviewCard()
                     }
                     composable(NavigationRoutes.CoinDetail.name){
