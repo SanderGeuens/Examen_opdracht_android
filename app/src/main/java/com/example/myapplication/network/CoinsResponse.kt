@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoinsResponse (
     val data:List<ApiCryptoCoin>,
-    val info: InfoCoinsResponse
+    val timestamp: String
 ) {
 
 }

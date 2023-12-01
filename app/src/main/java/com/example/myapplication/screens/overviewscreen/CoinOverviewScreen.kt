@@ -44,6 +44,7 @@ fun CoinOverviewScreen (
         when (coinUiState) {
             is CoinUiState.Loading -> LoadingScreen()
             is CoinUiState.Success -> Text(text=coinUiState.coins)
+            //CoinOverviewCard()
             is CoinUiState.Error -> ErrorScreen()
         }
 
@@ -69,6 +70,7 @@ fun CoinOverviewCard(
     coins:String = "niets"
 ) {
     Card (
+
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),

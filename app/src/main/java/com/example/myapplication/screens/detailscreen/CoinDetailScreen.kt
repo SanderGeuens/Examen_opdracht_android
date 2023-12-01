@@ -41,6 +41,7 @@ fun CoinDetailCard(
     modifier : Modifier = Modifier,
 ) {
     Card (
+
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
