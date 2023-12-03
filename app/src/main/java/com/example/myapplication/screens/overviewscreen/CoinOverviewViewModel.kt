@@ -11,12 +11,13 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.myapplication.CoinApplication
 import com.example.myapplication.data.CoinsRepository
+import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 sealed interface CoinUiState {
-    data class Success(val coins: List<ApiCryptoCoin>) : CoinUiState
+    data class Success(val coins: List<CryptoCoin>) : CoinUiState
     object Error : CoinUiState
     object Loading : CoinUiState
 }

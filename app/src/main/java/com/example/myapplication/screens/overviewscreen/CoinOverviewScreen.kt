@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.R
+import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
 import java.math.RoundingMode
 
@@ -63,7 +64,7 @@ fun CoinOverviewScreen (
 @Composable
 fun CoinOverviewColumn (
     modifier: Modifier = Modifier,
-    coins:List<ApiCryptoCoin>
+    coins:List<CryptoCoin>
 ) {
 
     LazyColumn() {
