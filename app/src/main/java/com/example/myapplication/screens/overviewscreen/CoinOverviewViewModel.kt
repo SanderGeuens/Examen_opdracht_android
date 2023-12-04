@@ -15,6 +15,8 @@ import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -39,11 +41,11 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
         try {
             viewModelScope.launch { coinsRepository.refresh() }
 
-            uiListState = coinsRepository.getCoins().map { TaskListState(it) }
+            uiListState = coinsRepository.getCoins().map { CoinListState(it) }
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(5_000L),
-                    initialValue = TaskListState()
+                    initialValue = CoinListState()
                 )
             coinUiState = CoinUiState.Success
         }
@@ -66,7 +68,7 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
             }
         }
         */
-    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

@@ -15,13 +15,13 @@ import kotlinx.coroutines.flow.onEach
 import java.net.SocketTimeoutException
 
 interface CoinsRepository {
-    suspend fun getCoins(): Flow<List<CryptoCoin>>
+    fun getCoins(): Flow<List<CryptoCoin>>
 
     suspend fun refresh()
 }
 
 class CashingCoinsRepository(private val coinDao: CoinDao, private val coinApiService:CoinApiService):CoinsRepository {
-    override suspend fun getCoins(): Flow<List<CryptoCoin>>{
+    override fun getCoins(): Flow<List<CryptoCoin>>{
         return coinDao.getAllItems().map {
             it.asDomainCoins()
         }.onEach {
