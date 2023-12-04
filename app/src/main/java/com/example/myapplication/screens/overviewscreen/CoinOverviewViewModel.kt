@@ -13,11 +13,13 @@ import com.example.myapplication.CoinApplication
 import com.example.myapplication.data.CoinsRepository
 import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 sealed interface CoinUiState {
-    data class Success(val coins: List<CryptoCoin>) : CoinUiState
+    object Success : CoinUiState
     object Error : CoinUiState
     object Loading : CoinUiState
 }
@@ -27,11 +29,31 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
     var coinUiState : CoinUiState by mutableStateOf(CoinUiState.Loading)
         private set
 
+    lateinit var uiListState : StateFlow<CoinListState>
+
     init {
         getCoins()
     }
 
     private fun getCoins () {
+        try {
+            viewModelScope.launch { coinsRepository.refresh() }
+
+            uiListState = coinsRepository.getCoins().map { TaskListState(it) }
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5_000L),
+                    initialValue = TaskListState()
+                )
+            coinUiState = CoinUiState.Success
+        }
+            catch (e: IOException){
+                //show a toast? save a log on firebase? ...
+                //set the error state
+                coinUiState = CoinUiState.Error
+            }
+    }
+        /*
         viewModelScope.launch {
 
             coinUiState = try {
@@ -43,6 +65,7 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
                 CoinUiState.Error
             }
         }
+        */
     }
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
@@ -55,3 +78,4 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
     }
 
 }
+data class CoinListState(val coinList: List<CryptoCoin> = listOf())
