@@ -18,6 +18,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,7 +40,8 @@ fun CoinOverviewScreen (
     coinOverviewViewModel: CoinOverviewViewModel = viewModel(factory= CoinOverviewViewModel.Factory)
 ) {
 
-    val coinUiState = coinOverviewViewModel.coinUiState
+    val coinListState by coinOverviewViewModel.uiListState.collectAsState()
+    val coinApiState = coinOverviewViewModel.coinApiState
 
     Column (
         modifier = modifier.padding(horizontal = 20.dp),
@@ -51,11 +54,11 @@ fun CoinOverviewScreen (
             fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(30.dp))
-        when (coinUiState) {
-            is CoinUiState.Loading -> LoadingScreen()
-            is CoinUiState.Success -> CoinOverviewColumn(coins = coinUiState.coins)
+        when (coinApiState) {
+            is CoinApiState.Loading -> LoadingScreen()
+            is CoinApiState.Success -> CoinOverviewColumn(coinListState = coinListState)
             //CoinOverviewCard()
-            is CoinUiState.Error -> ErrorScreen()
+            is CoinApiState.Error -> ErrorScreen()
         }
 
     }
@@ -64,11 +67,12 @@ fun CoinOverviewScreen (
 @Composable
 fun CoinOverviewColumn (
     modifier: Modifier = Modifier,
-    coins:List<CryptoCoin>
+    //coins:List<CryptoCoin>
+    coinListState:CoinListState
 ) {
 
     LazyColumn() {
-        items(coins) { item ->
+        items(coinListState.coinList) { item ->
             Spacer(modifier = Modifier.height(height=10.dp))
             CoinOverviewCard(name = item.name,rank = item.rank,price=item.priceUsd, modifier = Modifier.padding(horizontal = 20.dp))
             Spacer(modifier = Modifier.height(height=10.dp))

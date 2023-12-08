@@ -18,6 +18,8 @@ interface CoinsRepository {
     fun getCoins(): Flow<List<CryptoCoin>>
 
     suspend fun refresh()
+
+    suspend fun insertCoin(coin: CryptoCoin)
 }
 
 class CashingCoinsRepository(private val coinDao: CoinDao, private val coinApiService:CoinApiService):CoinsRepository {
@@ -31,12 +33,16 @@ class CashingCoinsRepository(private val coinDao: CoinDao, private val coinApiSe
         }
     }
 
+    override suspend fun insertCoin(coin: CryptoCoin) {
+        coinDao.insert(coin.asDbCoin())
+    }
+
     override suspend fun refresh(){
         try {
             coinApiService.getCoinsAsFlow().asDomainObjects().collect {
                     value ->
                 for(coin in value) {
-                    coinDao.insert(coin.asDbCoin())
+                    insertCoin(coin)
                 }
             }
         }

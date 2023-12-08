@@ -20,15 +20,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-sealed interface CoinUiState {
-    object Success : CoinUiState
-    object Error : CoinUiState
-    object Loading : CoinUiState
+sealed interface CoinApiState {
+    object Success : CoinApiState
+    object Error : CoinApiState
+    object Loading : CoinApiState
 }
 
 class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewModel(){
 
-    var coinUiState : CoinUiState by mutableStateOf(CoinUiState.Loading)
+    var coinApiState : CoinApiState by mutableStateOf(CoinApiState.Loading)
         private set
 
     lateinit var uiListState : StateFlow<CoinListState>
@@ -47,12 +47,12 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
                     started = SharingStarted.WhileSubscribed(5_000L),
                     initialValue = CoinListState()
                 )
-            coinUiState = CoinUiState.Success
+            coinApiState = CoinApiState.Success
         }
             catch (e: IOException){
                 //show a toast? save a log on firebase? ...
                 //set the error state
-                coinUiState = CoinUiState.Error
+                coinApiState = CoinApiState.Error
             }
     }
         /*
