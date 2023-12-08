@@ -114,19 +114,19 @@ fun CoinDetailCard(
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="rank :$rank",
+            text="rank: $rank",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="symbol :$symbol",
+            text="symbol: $symbol",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="price :$$priceDouble",
+            text="price: $$priceDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
@@ -143,12 +143,14 @@ fun CoinDetailCard(
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text="max supply: $maxSupplyDouble",
-            fontSize = 19.sp,
-            modifier = Modifier.padding(horizontal = 30.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+        if (maxSupply != null) {
+            Text(
+                text="max supply: $maxSupplyDouble",
+                fontSize = 19.sp,
+                modifier = Modifier.padding(horizontal = 30.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+        }
         Text(
             text="market cap usd: $marketCapUsdDouble",
             fontSize = 19.sp,
@@ -160,12 +162,14 @@ fun CoinDetailCard(
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text="vwap 24H hour: $vwap24HrDouble",
-            fontSize = 19.sp,
-            modifier = Modifier.padding(horizontal = 30.dp)
-        )
+        if (vwap24Hr != null) {
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text="vwap 24H hour: $vwap24HrDouble",
+                fontSize = 19.sp,
+                modifier = Modifier.padding(horizontal = 30.dp)
+            )
+        }
         Spacer(modifier = Modifier.height(20.dp))
         Button (
             onClick = {},
