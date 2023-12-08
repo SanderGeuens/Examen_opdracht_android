@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.math.RoundingMode
 
 @Composable
 fun CoinDetailScreen (
@@ -68,13 +69,40 @@ fun CoinDetailCard(
     changePercent24Hr: String,
     vwap24Hr: String?,
 ) {
+    var priceDouble: Double = priceUsd.toDouble()
+    priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+    var  changePercent24HrDouble: Double = changePercent24Hr.toDouble()
+    changePercent24HrDouble =changePercent24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+    var supplyDouble: Double = supply.toDouble()
+    supplyDouble = supplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+    var maxSupplyDouble: Double = 0.0
+    if (maxSupply != null) {
+        maxSupplyDouble = maxSupply.toDouble()
+        maxSupplyDouble = maxSupplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    }
+
+    var marketCapUsdDouble: Double = marketCapUsd.toDouble()
+    marketCapUsdDouble = marketCapUsdDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+    var volumeUsd24HrDouble: Double = volumeUsd24Hr.toDouble()
+    volumeUsd24HrDouble = volumeUsd24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+
+    var vwap24HrDouble: Double  = 0.0
+    if (vwap24Hr !=null) {
+        vwap24HrDouble = vwap24Hr.toDouble()
+        vwap24HrDouble = vwap24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    }
+
     Card (
 
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
         modifier = Modifier
-            .height(470.dp)
+            .height(500.dp)
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
     ){
@@ -86,55 +114,55 @@ fun CoinDetailCard(
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="rank :1",
+            text="rank :$rank",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="price :33",
+            text="symbol :$symbol",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="priceChange1h: 0.46",
+            text="price :$$priceDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="priceChange1d: 0.26",
+            text="change percent 24 hour: $changePercent24HrDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="priceChange1w: 0.49",
+            text="supply: $supplyDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="volume: 55545343423232",
+            text="max supply: $maxSupplyDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="market cap: 37587538146.52646",
+            text="market cap usd: $marketCapUsdDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="available supply: 153856150",
+            text="volume usd 24 hour: $volumeUsd24HrDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="total supply: 153856150",
+            text="vwap 24H hour: $vwap24HrDouble",
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
