@@ -93,7 +93,7 @@ fun CoinApp (
                     modifier = Modifier.padding(innerPadding)
                 ){
                     composable(NavigationRoutes.CoinOverview.name) {
-                        CoinOverviewScreen(coinDetailViewModel = coinDetailViewModel)
+                        CoinOverviewScreen(coinDetailViewModel = coinDetailViewModel, navigateToDetails = {navController.navigate(NavigationRoutes.CoinDetail.name)})
                     }
                     composable(NavigationRoutes.CoinDetail.name){
                         CoinDetailScreen(coinDetailViewModel = coinDetailViewModel)

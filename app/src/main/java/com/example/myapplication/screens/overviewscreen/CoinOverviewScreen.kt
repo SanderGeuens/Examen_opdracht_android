@@ -40,6 +40,7 @@ fun CoinOverviewScreen (
     modifier: Modifier = Modifier,
     coinOverviewViewModel: CoinOverviewViewModel = viewModel(factory= CoinOverviewViewModel.Factory),
     coinDetailViewModel: CoinDetailViewModel,
+    navigateToDetails:()->Unit,
 ) {
 
     val coinListState by coinOverviewViewModel.uiListState.collectAsState()
@@ -58,7 +59,7 @@ fun CoinOverviewScreen (
         Spacer(modifier = Modifier.height(30.dp))
         when (coinApiState) {
             is CoinApiState.Loading -> LoadingScreen()
-            is CoinApiState.Success -> CoinOverviewColumn(coins = coinListState.coinList, coinDetailViewModel = coinDetailViewModel)
+            is CoinApiState.Success -> CoinOverviewColumn(coins = coinListState.coinList, coinDetailViewModel = coinDetailViewModel, navigateToDetails = navigateToDetails)
             is CoinApiState.Error -> ErrorScreen()
         }
 
@@ -71,12 +72,16 @@ fun CoinOverviewColumn (
     coins:List<CryptoCoin>,
     //coinListState:CoinListState,
     coinDetailViewModel: CoinDetailViewModel,
+    navigateToDetails:()->Unit,
 ) {
 
     LazyColumn() {
         items(coins) { item ->
             Spacer(modifier = Modifier.height(height=10.dp))
-            CoinOverviewCard(coin = item, modifier = Modifier.padding(horizontal = 20.dp), coinDetailViewModel = coinDetailViewModel)
+            CoinOverviewCard(coin = item,
+                modifier = Modifier.padding(horizontal = 20.dp),
+                coinDetailViewModel = coinDetailViewModel,
+                navigateToDetails = navigateToDetails)
             Spacer(modifier = Modifier.height(height=10.dp))
         }
     }
@@ -92,12 +97,11 @@ fun CoinOverviewCard(
      */
     coin:CryptoCoin,
     coinDetailViewModel: CoinDetailViewModel,
+    navigateToDetails:()->Unit,
 ) {
 
     var priceDouble: Double = coin.priceUsd.toDouble()
     priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
-
-
 
     Card(
 
@@ -146,7 +150,7 @@ fun CoinOverviewCard(
                         priceUsd = coin.priceUsd,
                         changePercent24Hr = coin.changePercent24Hr,
                         vwap24Hr = coin.vwap24Hr
-                    ) }
+                    );navigateToDetails()}
                 ) {
                     Text("More details")
                 }
