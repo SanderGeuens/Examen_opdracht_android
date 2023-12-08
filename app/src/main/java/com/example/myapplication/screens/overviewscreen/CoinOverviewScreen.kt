@@ -58,7 +58,7 @@ fun CoinOverviewScreen (
         Spacer(modifier = Modifier.height(30.dp))
         when (coinApiState) {
             is CoinApiState.Loading -> LoadingScreen()
-            is CoinApiState.Success -> CoinOverviewColumn(coinListState = coinListState, coinDetailViewModel = coinDetailViewModel)
+            is CoinApiState.Success -> CoinOverviewColumn(coins = coinListState.coinList, coinDetailViewModel = coinDetailViewModel)
             is CoinApiState.Error -> ErrorScreen()
         }
 
@@ -68,13 +68,13 @@ fun CoinOverviewScreen (
 @Composable
 fun CoinOverviewColumn (
     modifier: Modifier = Modifier,
-    //coins:List<CryptoCoin>
-    coinListState:CoinListState,
+    coins:List<CryptoCoin>,
+    //coinListState:CoinListState,
     coinDetailViewModel: CoinDetailViewModel,
 ) {
 
     LazyColumn() {
-        items(coinListState.coinList) { item ->
+        items(coins) { item ->
             Spacer(modifier = Modifier.height(height=10.dp))
             CoinOverviewCard(coin = item, modifier = Modifier.padding(horizontal = 20.dp), coinDetailViewModel = coinDetailViewModel)
             Spacer(modifier = Modifier.height(height=10.dp))
