@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -27,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.navigation.NavigationRoutes
 import com.example.myapplication.navigation.navidrawer.NavigationDrawer
 import com.example.myapplication.screens.detailscreen.CoinDetailScreen
+import com.example.myapplication.screens.detailscreen.CoinDetailViewModel
 import com.example.myapplication.screens.favoritescreen.CoinFavoritesScreen
 import com.example.myapplication.screens.overviewscreen.CoinOverviewCard
 import com.example.myapplication.screens.overviewscreen.CoinOverviewScreen
@@ -55,9 +57,7 @@ fun CoinApp (
             mutableIntStateOf(0)
         }
 
-        //val coinOverviewViewModel: CoinOverviewViewModel = viewModel(/*factory= CoinOverviewViewModel.Factory*/)
-
-
+        val coinDetailViewModel: CoinDetailViewModel = viewModel()
 
         ModalNavigationDrawer(
             gesturesEnabled = true, // Swipe voor navigatiebar
@@ -93,11 +93,10 @@ fun CoinApp (
                     modifier = Modifier.padding(innerPadding)
                 ){
                     composable(NavigationRoutes.CoinOverview.name) {
-                        CoinOverviewScreen(/*coinUiState= coinOverviewViewModel.coinUiState*/)
-                        //CoinOverviewCard()
+                        CoinOverviewScreen(coinDetailViewModel = coinDetailViewModel)
                     }
                     composable(NavigationRoutes.CoinDetail.name){
-                        CoinDetailScreen()
+                        CoinDetailScreen(coinDetailViewModel = coinDetailViewModel)
                     }
                     composable(NavigationRoutes.CoinFavorites.name){
                         CoinFavoritesScreen()

@@ -11,6 +11,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +22,10 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun CoinDetailScreen (
     modifier : Modifier = Modifier,
+    coinDetailViewModel: CoinDetailViewModel,
 ) {
+
+    val detailUiState by coinDetailViewModel.uiState.collectAsState()
 
     Column (
         modifier = modifier.padding(horizontal = 20.dp)
@@ -33,12 +38,35 @@ fun CoinDetailScreen (
             Text(text="Details", textAlign = TextAlign.Center, fontSize = 30.sp)
         }
         Spacer(modifier = Modifier.height(30.dp))
-        CoinDetailCard()
+        CoinDetailCard(
+            id = detailUiState.id,
+            rank = detailUiState.rank,
+            symbol = detailUiState.symbol,
+            name = detailUiState.name,
+            supply = detailUiState.supply,
+            maxSupply = detailUiState.maxSupply,
+            marketCapUsd = detailUiState.marketCapUsd,
+            volumeUsd24Hr = detailUiState.volumeUsd24Hr,
+            priceUsd = detailUiState.priceUsd,
+            changePercent24Hr = detailUiState.changePercent24Hr,
+            vwap24Hr = detailUiState.vwap24Hr,
+        )
     }
 }
 @Composable
 fun CoinDetailCard(
     modifier : Modifier = Modifier,
+    id: String ,
+    rank: String,
+    symbol: String,
+    name: String,
+    supply: String,
+    maxSupply: String?,
+    marketCapUsd: String,
+    volumeUsd24Hr: String,
+    priceUsd: String,
+    changePercent24Hr: String,
+    vwap24Hr: String?,
 ) {
     Card (
 
@@ -52,7 +80,7 @@ fun CoinDetailCard(
     ){
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text="Bitcoin",
+            text="$name",
             fontSize = 26.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
@@ -113,7 +141,9 @@ fun CoinDetailCard(
         Spacer(modifier = Modifier.height(20.dp))
         Button (
             onClick = {},
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp)
         ) {
             Text(text="Add to favorites")
         }

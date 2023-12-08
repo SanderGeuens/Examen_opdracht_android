@@ -32,12 +32,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.R
 import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
+import com.example.myapplication.screens.detailscreen.CoinDetailViewModel
 import java.math.RoundingMode
 
 @Composable
 fun CoinOverviewScreen (
     modifier: Modifier = Modifier,
-    coinOverviewViewModel: CoinOverviewViewModel = viewModel(factory= CoinOverviewViewModel.Factory)
+    coinOverviewViewModel: CoinOverviewViewModel = viewModel(factory= CoinOverviewViewModel.Factory),
+    coinDetailViewModel: CoinDetailViewModel,
 ) {
 
     val coinListState by coinOverviewViewModel.uiListState.collectAsState()
@@ -56,8 +58,7 @@ fun CoinOverviewScreen (
         Spacer(modifier = Modifier.height(30.dp))
         when (coinApiState) {
             is CoinApiState.Loading -> LoadingScreen()
-            is CoinApiState.Success -> CoinOverviewColumn(coinListState = coinListState)
-            //CoinOverviewCard()
+            is CoinApiState.Success -> CoinOverviewColumn(coinListState = coinListState, coinDetailViewModel = coinDetailViewModel)
             is CoinApiState.Error -> ErrorScreen()
         }
 
@@ -68,13 +69,14 @@ fun CoinOverviewScreen (
 fun CoinOverviewColumn (
     modifier: Modifier = Modifier,
     //coins:List<CryptoCoin>
-    coinListState:CoinListState
+    coinListState:CoinListState,
+    coinDetailViewModel: CoinDetailViewModel,
 ) {
 
     LazyColumn() {
         items(coinListState.coinList) { item ->
             Spacer(modifier = Modifier.height(height=10.dp))
-            CoinOverviewCard(name = item.name,rank = item.rank,price=item.priceUsd, modifier = Modifier.padding(horizontal = 20.dp))
+            CoinOverviewCard(coin = item, modifier = Modifier.padding(horizontal = 20.dp), coinDetailViewModel = coinDetailViewModel)
             Spacer(modifier = Modifier.height(height=10.dp))
         }
     }
@@ -83,12 +85,16 @@ fun CoinOverviewColumn (
 @Composable
 fun CoinOverviewCard(
     modifier: Modifier = Modifier,
+    /*
     name:String,
     rank:String,
     price:String,
+     */
+    coin:CryptoCoin,
+    coinDetailViewModel: CoinDetailViewModel,
 ) {
 
-    var priceDouble: Double = price.toDouble()
+    var priceDouble: Double = coin.priceUsd.toDouble()
     priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
 
 
@@ -104,7 +110,7 @@ fun CoinOverviewCard(
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = name,
+            text = coin.name,
             fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
@@ -117,9 +123,9 @@ fun CoinOverviewCard(
                     .weight(1f)
                     .padding(horizontal = 30.dp)
             ) {
-                Text(text = "rank: ${rank}")
+                Text(text = "rank: ${coin.rank}")
                 Spacer(modifier = Modifier.height(10.dp))
-                Text(text = "price: $priceDouble USD")
+                Text(text = "price: $$priceDouble")
             }
             Column(
                 modifier = Modifier.weight(1f),
@@ -128,7 +134,19 @@ fun CoinOverviewCard(
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
                 Button(
-                    onClick = { }
+                    onClick = {coinDetailViewModel.updateUiState(
+                        id = coin.id,
+                        rank = coin.rank,
+                        symbol = coin.symbol,
+                        name = coin.name,
+                        supply = coin.supply,
+                        maxSupply = coin.maxSupply,
+                        marketCapUsd = coin.marketCapUsd,
+                        volumeUsd24Hr = coin.volumeUsd24Hr,
+                        priceUsd = coin.priceUsd,
+                        changePercent24Hr = coin.changePercent24Hr,
+                        vwap24Hr = coin.vwap24Hr
+                    ) }
                 ) {
                     Text("More details")
                 }
