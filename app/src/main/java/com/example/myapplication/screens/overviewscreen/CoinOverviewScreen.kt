@@ -125,15 +125,16 @@ fun CoinOverviewCard(
         ) {
             Column(
                 modifier = Modifier
-                    .weight(1.4f)
+                    .width(170.dp)
                     .padding(horizontal = 30.dp)
             ) {
                 Text(text = "rank: ${coin.rank}")
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = "price: $$priceDouble")
             }
+            Spacer(modifier = Modifier.weight(1f))
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.width(140.dp).padding(end=15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
