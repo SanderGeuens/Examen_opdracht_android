@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -124,7 +125,7 @@ fun CoinOverviewCard(
         ) {
             Column(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1.4f)
                     .padding(horizontal = 30.dp)
             ) {
                 Text(text = "rank: ${coin.rank}")

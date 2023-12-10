@@ -112,7 +112,7 @@ fun CoinApp (
                         }
                     }
                 }
-            
+
         }
         if(navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER) {
 
