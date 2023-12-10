@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
@@ -32,39 +33,21 @@ fun AppBar (
         TopAppBar(
             title = {
 
-                Text(stringResource(id = currentScreen.title))
+                Text(text="Cryptocoin advise app")
 
             },
-            actions = {
-                Row(
-                    modifier = Modifier
-                        .padding(end = 16.dp, start = 16.dp)
+            navigationIcon = {if (canNavigateBack) {
+                IconButton(
+                    onClick = navigateUp,
                 ) {
-                    if (canNavigateBack) {
-                        IconButton(
-                            onClick = navigateUp,
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.ArrowBack,
-                                contentDescription = "Localized description"
-                            )
-                            /* Image(
-                                painter = image,
-                                contentDescription = "navigate back",
-                            )*/
-                        }
-                    }
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Localized description"
+                    )
 
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    IconButton(onClick = openDrawer) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = "Menu"
-                        )
-                    }
                 }
-            }
+            }},
+
         )
     }
 }
