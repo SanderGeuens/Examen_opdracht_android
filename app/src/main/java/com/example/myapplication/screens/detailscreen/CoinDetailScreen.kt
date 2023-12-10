@@ -36,22 +36,30 @@ fun CoinDetailScreen (
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text="Details", textAlign = TextAlign.Center, fontSize = 30.sp)
+            if (detailUiState.id.isNotEmpty()) {
+                Text(text="Details", textAlign = TextAlign.Center, fontSize = 30.sp)
+            }else {
+                Text(text="Select a coin first", textAlign = TextAlign.Center, fontSize = 30.sp)
+            }
+
         }
         Spacer(modifier = Modifier.height(30.dp))
-        CoinDetailCard(
-            id = detailUiState.id,
-            rank = detailUiState.rank,
-            symbol = detailUiState.symbol,
-            name = detailUiState.name,
-            supply = detailUiState.supply,
-            maxSupply = detailUiState.maxSupply,
-            marketCapUsd = detailUiState.marketCapUsd,
-            volumeUsd24Hr = detailUiState.volumeUsd24Hr,
-            priceUsd = detailUiState.priceUsd,
-            changePercent24Hr = detailUiState.changePercent24Hr,
-            vwap24Hr = detailUiState.vwap24Hr,
-        )
+        if (detailUiState.id.isNotEmpty()) {
+            CoinDetailCard(
+                id = detailUiState.id,
+                rank = detailUiState.rank,
+                symbol = detailUiState.symbol,
+                name = detailUiState.name,
+                supply = detailUiState.supply,
+                maxSupply = detailUiState.maxSupply,
+                marketCapUsd = detailUiState.marketCapUsd,
+                volumeUsd24Hr = detailUiState.volumeUsd24Hr,
+                priceUsd = detailUiState.priceUsd,
+                changePercent24Hr = detailUiState.changePercent24Hr,
+                vwap24Hr = detailUiState.vwap24Hr,
+            )
+        }
+
     }
 }
 @Composable
