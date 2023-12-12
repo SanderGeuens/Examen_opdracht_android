@@ -17,6 +17,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.navigation.NavigationRoutes
@@ -45,6 +46,7 @@ fun AppBar (
             navigationIcon = {if (canNavigateBack) {
                 IconButton(
                     onClick = navigateUp,
+                    modifier = Modifier.testTag("navigateBackIcon")
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,

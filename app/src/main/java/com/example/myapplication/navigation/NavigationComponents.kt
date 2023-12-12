@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
@@ -29,11 +30,17 @@ fun CoinBottomAppBar(goToOverview: () -> Unit, goToDetail: () -> Unit) {
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.primary,
         actions = {
-            IconButton(onClick = goToOverview) {
+            IconButton(
+                onClick = goToOverview,
+                modifier = Modifier.testTag("overviewIcon")
+            ) {
                 Icon(Icons.Filled.List, contentDescription = "navigate to overview screen")
             }
 
-            IconButton(onClick = goToDetail) {
+            IconButton(
+                onClick = goToDetail,
+                modifier = Modifier.testTag("detailsIcon")
+            ) {
                 Icon(
                     Icons.Filled.Info,
                     contentDescription = "navigate to detail page",
