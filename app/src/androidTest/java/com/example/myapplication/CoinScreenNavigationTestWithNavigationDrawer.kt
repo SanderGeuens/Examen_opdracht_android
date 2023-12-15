@@ -14,8 +14,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
-class CoinScreenNavigationTestWithNavigationRail{
+class CoinScreenNavigationTestWithNavigationDrawer{
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
@@ -27,23 +26,23 @@ class CoinScreenNavigationTestWithNavigationRail{
             navController = TestNavHostController(LocalContext.current).apply {
                 navigatorProvider.addNavigator(ComposeNavigator())
             }
-            CoinApp(navigationType = NavigationType.NAVIGATION_RAIL, navController = navController)
+            CoinApp(navigationType = NavigationType.PERMANENT_NAVIGATION_DRAWER, navController = navController)
         }
     }
 
     @Test
-    fun coinOverview_navigateToDetailsFromRail_verifyRoute() {
-        composeTestRule.onAllNodesWithTag("railIcon")[1].performClick()
+    fun coinOverview_navigateToDetailsFromDraer_verifyRoute() {
+        composeTestRule.onAllNodesWithTag("drawerIcon")[1].performClick()
         navController.assertCurrentRouteName(NavigationRoutes.CoinDetail.name)
     }
-    private fun navigateToDetailFromRail() {
-        composeTestRule.onAllNodesWithTag("railIcon")[1].performClick()
+    private fun navigateToDetailFromDrawer() {
+        composeTestRule.onAllNodesWithTag("drawerIcon")[1].performClick()
         navController.assertCurrentRouteName(NavigationRoutes.CoinDetail.name)
     }
     @Test
-    fun coinOverview_navigateToOverviewFromRail_verifyRoute() {
-        navigateToDetailFromRail()
-        composeTestRule.onAllNodesWithTag("railIcon")[0].performClick()
+    fun coinOverview_navigateToOverviewFromDrawer_verifyRoute() {
+        navigateToDetailFromDrawer()
+        composeTestRule.onAllNodesWithTag("drawerIcon")[0].performClick()
         navController.assertCurrentRouteName(NavigationRoutes.CoinOverview.name)
     }
 }

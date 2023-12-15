@@ -77,7 +77,8 @@ fun NavigationDrawerContent(
                 colors = NavigationDrawerItemDefaults.colors(
                     unselectedContainerColor = Color.Transparent
                 ),
-                onClick = { onTabPressed(navItem.name) }
+                onClick = { onTabPressed(navItem.name) },
+                modifier = Modifier.testTag("drawerIcon")
             )
         }
     }
@@ -85,11 +86,13 @@ fun NavigationDrawerContent(
 
 @Composable
 fun CoinNavigationRail(selectedDestination: NavDestination?, onTabPressed: (String) -> Unit, modifier : Modifier = Modifier) {
+
     NavigationRail(modifier = modifier) {
         for (navItem in NavigationRoutes.values()) {
             NavigationRailItem(
                 selected = selectedDestination?.route == navItem.name,
                 onClick = { onTabPressed(navItem.name) },
+                modifier = Modifier.testTag("railIcon"),
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
@@ -97,6 +100,7 @@ fun CoinNavigationRail(selectedDestination: NavDestination?, onTabPressed: (Stri
                     )
                 }
             )
+
         }
     }
 }
