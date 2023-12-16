@@ -46,6 +46,7 @@ class CoinOverviewTest{
     }
     @Test
     fun testOverviewScreen2 () {
+        composeTestRule.onAllNodesWithTag("coinOverviewCard").onFirst().assertIsDisplayed()
         composeTestRule.onAllNodesWithTag("detailsButton").onFirst().assertIsDisplayed()
     }
 }
