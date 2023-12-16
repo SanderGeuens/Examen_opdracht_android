@@ -14,6 +14,8 @@ import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.myapplication.util.NavigationType
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,10 +37,11 @@ class CoinOverviewTest{
     }
 
     @Test
-    fun testOverviewScreen () {
+    fun testOverviewScreen ()= runTest(){
 
         composeTestRule.onNodeWithText("Overview of cryptocoins").assertIsDisplayed()
         composeTestRule.onNodeWithTag("searchInput").assertIsDisplayed()
-        //composeTestRule.onAllNodesWithTag("coinOverviewCard").onFirst().assertIsDisplayed()
+        delay(5000)
+        composeTestRule.onAllNodesWithTag("coinOverviewCard").onFirst().assertIsDisplayed()
     }
 }
