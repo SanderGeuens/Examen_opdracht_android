@@ -125,7 +125,7 @@ fun CoinOverviewCard(
     navigateToDetails:()->Unit,
 ) {
 
-    val priceDouble: Double = UtilMethods.goFromStringToDouble(coin.priceUsd)
+    val priceDouble: Double = UtilMethods.goFromStringToDoubleRounded(coin.priceUsd)
 
     Card(
 

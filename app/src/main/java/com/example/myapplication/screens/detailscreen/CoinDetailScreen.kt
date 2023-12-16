@@ -89,25 +89,25 @@ fun CoinDetailCard(
     var supplyDouble: Double = supply.toDouble()
     supplyDouble = supplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
     */
-    val priceDouble: Double = UtilMethods.goFromStringToDouble(priceUsd)
+    val priceDouble: Double = UtilMethods.goFromStringToDoubleRounded(priceUsd)
 
-    val  changePercent24HrDouble: Double = UtilMethods.goFromStringToDouble(changePercent24Hr)
+    val  changePercent24HrDouble: Double = UtilMethods.goFromStringToDoubleRounded(changePercent24Hr)
 
-    val supplyDouble: Double = UtilMethods.goFromStringToDouble(supply)
+    val supplyDouble: Double = UtilMethods.goFromStringToDoubleRounded(supply)
 
 
     var maxSupplyDouble: Double? = null
     if (maxSupply != null) {
-        maxSupplyDouble = UtilMethods.goFromStringToDouble(maxSupply)
+        maxSupplyDouble = UtilMethods.goFromStringToDoubleRounded(maxSupply)
     }
 
-    val marketCapUsdDouble: Double = UtilMethods.goFromStringToDouble(marketCapUsd)
+    val marketCapUsdDouble: Double = UtilMethods.goFromStringToDoubleRounded(marketCapUsd)
 
-    val volumeUsd24HrDouble: Double = UtilMethods.goFromStringToDouble(volumeUsd24Hr)
+    val volumeUsd24HrDouble: Double = UtilMethods.goFromStringToDoubleRounded(volumeUsd24Hr)
 
     var vwap24HrDouble: Double?  = null
     if (vwap24Hr !=null) {
-        vwap24HrDouble = UtilMethods.goFromStringToDouble(vwap24Hr)
+        vwap24HrDouble = UtilMethods.goFromStringToDoubleRounded(vwap24Hr)
     }
 
     Card (

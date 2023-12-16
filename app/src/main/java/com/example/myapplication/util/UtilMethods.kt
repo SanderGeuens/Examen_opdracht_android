@@ -5,7 +5,7 @@ import java.math.RoundingMode
 public class UtilMethods{
 
     companion object {
-        fun goFromStringToDouble (numberInString:String):Double {
+        fun goFromStringToDoubleRounded (numberInString:String):Double {
             return numberInString.toDouble().toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
         }
     }

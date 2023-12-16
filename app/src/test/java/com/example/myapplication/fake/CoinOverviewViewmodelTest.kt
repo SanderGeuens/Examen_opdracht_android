@@ -18,10 +18,10 @@ class CoinOverviewViewmodelTest {
     @Test
     fun coinOverviewViewModel_getCoins_verifyCoinUiStateSuccess() =
         runTest{
-            val marsViewModel = CoinOverviewViewModel(coinsRepository = FakeCoinsRepository())
+            val coinOverviewViewModel = CoinOverviewViewModel(coinsRepository = FakeCoinsRepository())
             assertEquals(
                 CoinUiState.Success(FakeDataSource.coinList),
-                marsViewModel.coinUiState
+                coinOverviewViewModel.coinUiState
             )
         }
 }

@@ -3,6 +3,7 @@ package com.example.myapplication.fake
 import com.example.myapplication.network.ApiCryptoCoin
 import com.example.myapplication.network.CoinsResponse
 
+
 object FakeDataSource {
     const val id1 ="bitcoin"
     const val rank1="1"
