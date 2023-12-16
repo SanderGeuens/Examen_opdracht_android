@@ -35,6 +35,7 @@ import com.example.myapplication.R
 import com.example.myapplication.model.CryptoCoin
 import com.example.myapplication.network.ApiCryptoCoin
 import com.example.myapplication.screens.detailscreen.CoinDetailViewModel
+import com.example.myapplication.util.UtilMethods
 import java.math.RoundingMode
 
 @Composable
@@ -102,8 +103,9 @@ fun CoinOverviewCard(
     navigateToDetails:()->Unit,
 ) {
 
-    var priceDouble: Double = coin.priceUsd.toDouble()
-    priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    //var priceDouble: Double = coin.priceUsd.toDouble()
+    //priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    val priceDouble: Double = UtilMethods.goFromStringToDouble(coin.priceUsd)
 
     Card(
 
