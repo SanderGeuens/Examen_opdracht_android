@@ -37,11 +37,15 @@ class CoinOverviewTest{
     }
 
     @Test
-    fun testOverviewScreen ()= runTest(){
+    fun testOverviewScreen1 (){
 
         composeTestRule.onNodeWithText("Overview of cryptocoins").assertIsDisplayed()
         composeTestRule.onNodeWithTag("searchInput").assertIsDisplayed()
-        delay(5000)
-        composeTestRule.onAllNodesWithTag("coinOverviewCard").onFirst().assertIsDisplayed()
+
+
+    }
+    @Test
+    fun testOverviewScreen2 () {
+        composeTestRule.onAllNodesWithTag("detailsButton").onFirst().assertIsDisplayed()
     }
 }
