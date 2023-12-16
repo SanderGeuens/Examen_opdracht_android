@@ -108,7 +108,7 @@ fun CoinDetailCard(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
         modifier = Modifier
-            .height(500.dp)
+            .height(450.dp)
             .fillMaxWidth()
             .padding(horizontal = 10.dp).testTag("coinDetailCard")
     ){
@@ -168,22 +168,12 @@ fun CoinDetailCard(
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text="vwap 24H hour: ${vwap24HrDouble?:"/"}",
+            fontSize = 19.sp,
+            modifier = Modifier.padding(horizontal = 30.dp)
+        )
 
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text="vwap 24H hour: ${vwap24HrDouble?:"/"}",
-                fontSize = 19.sp,
-                modifier = Modifier.padding(horizontal = 30.dp)
-            )
-
-        Spacer(modifier = Modifier.height(20.dp))
-        Button (
-            onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp)
-        ) {
-            Text(text="Add to favorites")
-        }
     }
 }
