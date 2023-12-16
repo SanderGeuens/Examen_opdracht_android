@@ -40,7 +40,6 @@ import com.example.myapplication.navigation.CoinBottomAppBar
 import com.example.myapplication.navigation.CoinNavigationRail
 import com.example.myapplication.navigation.NavigationDrawerContent
 import com.example.myapplication.navigation.NavigationRoutes
-import com.example.myapplication.navigation.navidrawer.NavigationDrawer
 import com.example.myapplication.screens.detailscreen.CoinDetailScreen
 import com.example.myapplication.screens.detailscreen.CoinDetailViewModel
 import com.example.myapplication.screens.favoritescreen.CoinFavoritesScreen
