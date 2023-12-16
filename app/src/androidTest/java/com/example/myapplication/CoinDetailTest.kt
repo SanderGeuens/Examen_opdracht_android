@@ -46,6 +46,7 @@ class CoinDetailTest {
     @Test
     fun testDetailScreen2() {
         navigateToDetailFromCoin()
+        composeTestRule.onNodeWithText("Details").assertIsDisplayed()
         composeTestRule.onNodeWithTag("coinDetailCard").assertIsDisplayed()
     }
 }
