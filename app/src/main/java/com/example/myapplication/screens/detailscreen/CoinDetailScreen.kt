@@ -80,16 +80,7 @@ fun CoinDetailCard(
     changePercent24Hr: String,
     vwap24Hr: String?,
 ) {
-    /*
-    var priceDouble: Double = priceUsd.toDouble()
-    priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
 
-    var  changePercent24HrDouble: Double = changePercent24Hr.toDouble()
-    changePercent24HrDouble =changePercent24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
-
-    var supplyDouble: Double = supply.toDouble()
-    supplyDouble = supplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
-    */
     val priceDouble: Double = UtilMethods.goFromStringToDoubleRounded(priceUsd)
 
     val  changePercent24HrDouble: Double = UtilMethods.goFromStringToDoubleRounded(changePercent24Hr)

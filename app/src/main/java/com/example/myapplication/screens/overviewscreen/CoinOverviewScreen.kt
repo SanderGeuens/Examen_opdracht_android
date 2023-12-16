@@ -115,11 +115,6 @@ fun CoinOverviewColumn (
 @Composable
 fun CoinOverviewCard(
     modifier: Modifier = Modifier,
-    /*
-    name:String,
-    rank:String,
-    price:String,
-     */
     coin:CryptoCoin,
     coinDetailViewModel: CoinDetailViewModel,
     navigateToDetails:()->Unit,

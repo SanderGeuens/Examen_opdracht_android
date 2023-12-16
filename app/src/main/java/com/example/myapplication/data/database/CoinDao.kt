@@ -20,11 +20,6 @@ interface CoinDao {
         @Delete
         suspend fun delete(item: DbCryptoCoin)
 
-        /*
-        @Query("SELECT * from coins WHERE id = :id")
-        fun getItem(name: String): Flow<DbCryptoCoin>
-        */
-
         @Query("SELECT * from coins ORDER BY rank ASC")
         fun getAllItems(): Flow<List<DbCryptoCoin>>
 

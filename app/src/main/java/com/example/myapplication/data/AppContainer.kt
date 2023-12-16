@@ -14,8 +14,6 @@ interface AppContainer {
 
 class DefaultAppContainer (private val context: Context): AppContainer {
     private val baseUrl =
-    //"https://android-kotlin-fun-mars-server.appspot.com"
-        //"https://api.coinlore.net/api/tickers/"
         "https://api.coincap.io/v2/"
 
     private val retrofit = Retrofit.Builder()

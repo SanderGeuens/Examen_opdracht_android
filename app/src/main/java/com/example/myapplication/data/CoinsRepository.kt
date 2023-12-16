@@ -47,7 +47,7 @@ class CashingCoinsRepository(private val coinDao: CoinDao, private val coinApiSe
             }
         }
         catch(e: SocketTimeoutException){
-            //log something
+
         }
     }
 

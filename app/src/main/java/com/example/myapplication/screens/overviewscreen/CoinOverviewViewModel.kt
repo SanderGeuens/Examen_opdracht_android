@@ -55,19 +55,7 @@ class CoinOverviewViewModel(private val coinsRepository:CoinsRepository) : ViewM
                 coinApiState = CoinApiState.Error
             }
     }
-        /*
-        viewModelScope.launch {
 
-            coinUiState = try {
-                //val coinsRepository = NetworkCoinsRepository()
-                val result = coinsRepository.getCoins()
-                //CoinUiState.Success(listResult.data.size.toString())
-                CoinUiState.Success(result)
-            }catch (e: IOException) {
-                CoinUiState.Error
-            }
-        }
-        */
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
