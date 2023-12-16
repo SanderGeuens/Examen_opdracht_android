@@ -26,8 +26,10 @@ import com.example.myapplication.navigation.NavigationRoutes
 @Composable
 fun AppBar (
     modifier:Modifier = Modifier,
+    currentScreen: NavigationRoutes,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit = {},
+    openDrawer: () -> Unit = {},
 ) {
 
     Surface(shadowElevation = 10.dp) {

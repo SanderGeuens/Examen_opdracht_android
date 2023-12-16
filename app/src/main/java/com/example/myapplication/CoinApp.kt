@@ -81,10 +81,15 @@ fun CoinApp (
                 Scaffold(
                     topBar = {
                         AppBar(
+                            currentScreen = NavigationRoutes.valueOf(
+                                backStackEntry?.destination?.route ?: NavigationRoutes.CoinOverview.name,
+                            ),
 
                             canNavigateBack = navController.previousBackStackEntry != null,
                             navigateUp = {navController.navigateUp()},
-
+                            openDrawer = {scope.launch {
+                                drawerState.open()
+                            }},
                         )
                     },
                     bottomBar ={ CoinBottomAppBar(goToOverview = goToOverview,goToDetail=goToDetail)}
@@ -126,10 +131,15 @@ fun CoinApp (
                 Scaffold(
                     topBar = {
                         AppBar(
+                            currentScreen = NavigationRoutes.valueOf(
+                                backStackEntry?.destination?.route ?: NavigationRoutes.CoinOverview.name,
+                            ),
 
                             canNavigateBack = navController.previousBackStackEntry != null,
-                            navigateUp = { navController.navigateUp() },
-
+                            navigateUp = {navController.navigateUp()},
+                            openDrawer = {scope.launch {
+                                drawerState.open()
+                            }},
                         )
                     }
                 ) { innerPadding ->
@@ -165,10 +175,15 @@ fun CoinApp (
                 Scaffold(
                     topBar = {
                         AppBar(
+                            currentScreen = NavigationRoutes.valueOf(
+                                backStackEntry?.destination?.route ?: NavigationRoutes.CoinOverview.name,
+                            ),
 
                             canNavigateBack = navController.previousBackStackEntry != null,
                             navigateUp = {navController.navigateUp()},
-
+                            openDrawer = {scope.launch {
+                                drawerState.open()
+                            }},
                         )
                     },
 
