@@ -1,0 +1,2 @@
+- To use this application, download the gitrepo and simply launch the app in a vm.
+- There are no specific credentials needed for usage of the app.
