@@ -157,7 +157,7 @@ fun CoinDetailCard(
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
-        
+
             Text(
                 text="max supply: ${maxSupplyDouble?:"/"}",
                 fontSize = 19.sp,
