@@ -73,7 +73,7 @@ fun CoinOverviewScreen (
             value = searchTerm,
             onValueChange = { searchTerm = it },
             label = { Text("search term") },
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp).testTag("searchInput")
         )
         Spacer(modifier = Modifier.height(20.dp))
         when (coinApiState) {
@@ -104,7 +104,7 @@ fun CoinOverviewColumn (
         items((list)) { item ->
             Spacer(modifier = Modifier.height(height=10.dp))
             CoinOverviewCard(coin = item,
-                modifier = Modifier.padding(horizontal = 20.dp),
+                modifier = Modifier.padding(horizontal = 20.dp).testTag("coinOverviewCard"),
                 coinDetailViewModel = coinDetailViewModel,
                 navigateToDetails = navigateToDetails)
             Spacer(modifier = Modifier.height(height=10.dp))
