@@ -103,8 +103,6 @@ fun CoinOverviewCard(
     navigateToDetails:()->Unit,
 ) {
 
-    //var priceDouble: Double = coin.priceUsd.toDouble()
-    //priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
     val priceDouble: Double = UtilMethods.goFromStringToDouble(coin.priceUsd)
 
     Card(

@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myapplication.util.UtilMethods
 import java.math.RoundingMode
 
 @Composable
@@ -78,6 +79,7 @@ fun CoinDetailCard(
     changePercent24Hr: String,
     vwap24Hr: String?,
 ) {
+    /*
     var priceDouble: Double = priceUsd.toDouble()
     priceDouble = priceDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
 
@@ -86,23 +88,26 @@ fun CoinDetailCard(
 
     var supplyDouble: Double = supply.toDouble()
     supplyDouble = supplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    */
+    val priceDouble: Double = UtilMethods.goFromStringToDouble(priceUsd)
+
+    val  changePercent24HrDouble: Double = UtilMethods.goFromStringToDouble(changePercent24Hr)
+
+    val supplyDouble: Double = UtilMethods.goFromStringToDouble(supply)
+
 
     var maxSupplyDouble: Double = 0.0
     if (maxSupply != null) {
-        maxSupplyDouble = maxSupply.toDouble()
-        maxSupplyDouble = maxSupplyDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+        maxSupplyDouble = UtilMethods.goFromStringToDouble(maxSupply)
     }
 
-    var marketCapUsdDouble: Double = marketCapUsd.toDouble()
-    marketCapUsdDouble = marketCapUsdDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    val marketCapUsdDouble: Double = UtilMethods.goFromStringToDouble(marketCapUsd)
 
-    var volumeUsd24HrDouble: Double = volumeUsd24Hr.toDouble()
-    volumeUsd24HrDouble = volumeUsd24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+    val volumeUsd24HrDouble: Double = UtilMethods.goFromStringToDouble(volumeUsd24Hr)
 
     var vwap24HrDouble: Double  = 0.0
     if (vwap24Hr !=null) {
-        vwap24HrDouble = vwap24Hr.toDouble()
-        vwap24HrDouble = vwap24HrDouble.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+        vwap24HrDouble = UtilMethods.goFromStringToDouble(vwap24Hr)
     }
 
     Card (
