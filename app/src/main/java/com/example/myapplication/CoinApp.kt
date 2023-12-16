@@ -42,7 +42,6 @@ import com.example.myapplication.navigation.NavigationDrawerContent
 import com.example.myapplication.navigation.NavigationRoutes
 import com.example.myapplication.screens.detailscreen.CoinDetailScreen
 import com.example.myapplication.screens.detailscreen.CoinDetailViewModel
-import com.example.myapplication.screens.favoritescreen.CoinFavoritesScreen
 import com.example.myapplication.screens.overviewscreen.CoinOverviewCard
 import com.example.myapplication.screens.overviewscreen.CoinOverviewScreen
 import com.example.myapplication.screens.overviewscreen.CoinOverviewViewModel
@@ -102,9 +101,7 @@ fun CoinApp (
                         composable(NavigationRoutes.CoinDetail.name){
                             CoinDetailScreen(coinDetailViewModel = coinDetailViewModel)
                         }
-                        composable(NavigationRoutes.CoinFavorites.name){
-                            CoinFavoritesScreen()
-                        }
+
                     }
                 }
 
@@ -149,9 +146,7 @@ fun CoinApp (
                         composable(NavigationRoutes.CoinDetail.name) {
                             CoinDetailScreen(coinDetailViewModel = coinDetailViewModel)
                         }
-                        composable(NavigationRoutes.CoinFavorites.name) {
-                            CoinFavoritesScreen()
-                        }
+
                     }
                 }
             }
@@ -190,9 +185,7 @@ fun CoinApp (
                         composable(NavigationRoutes.CoinDetail.name){
                             CoinDetailScreen(coinDetailViewModel = coinDetailViewModel)
                         }
-                        composable(NavigationRoutes.CoinFavorites.name){
-                            CoinFavoritesScreen()
-                        }
+
                     }
 
                 }

@@ -11,5 +11,4 @@ enum class NavigationRoutes(@StringRes val title: Int, val icon: ImageVector) {
 
     CoinOverview(title= R.string.coin_overview_title, Icons.Filled.List),
     CoinDetail(title= R.string.coin_detail_title,Icons.Filled.Info),
-    CoinFavorites(title=R.string.coin_favorites_title,Icons.Filled.Info),
 }
