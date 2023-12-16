@@ -96,7 +96,7 @@ fun CoinDetailCard(
     val supplyDouble: Double = UtilMethods.goFromStringToDouble(supply)
 
 
-    var maxSupplyDouble: Double = 0.0
+    var maxSupplyDouble: Double? = null
     if (maxSupply != null) {
         maxSupplyDouble = UtilMethods.goFromStringToDouble(maxSupply)
     }
@@ -105,7 +105,7 @@ fun CoinDetailCard(
 
     val volumeUsd24HrDouble: Double = UtilMethods.goFromStringToDouble(volumeUsd24Hr)
 
-    var vwap24HrDouble: Double  = 0.0
+    var vwap24HrDouble: Double?  = null
     if (vwap24Hr !=null) {
         vwap24HrDouble = UtilMethods.goFromStringToDouble(vwap24Hr)
     }
@@ -157,14 +157,14 @@ fun CoinDetailCard(
             modifier = Modifier.padding(horizontal = 30.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
-        if (maxSupply != null) {
+        
             Text(
-                text="max supply: $maxSupplyDouble",
+                text="max supply: ${maxSupplyDouble?:"/"}",
                 fontSize = 19.sp,
                 modifier = Modifier.padding(horizontal = 30.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
-        }
+
         Text(
             text="market cap usd: $marketCapUsdDouble",
             fontSize = 19.sp,
@@ -176,14 +176,14 @@ fun CoinDetailCard(
             fontSize = 19.sp,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
-        if (vwap24Hr != null) {
+
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text="vwap 24H hour: $vwap24HrDouble",
+                text="vwap 24H hour: ${vwap24HrDouble?:"/"}",
                 fontSize = 19.sp,
                 modifier = Modifier.padding(horizontal = 30.dp)
             )
-        }
+
         Spacer(modifier = Modifier.height(20.dp))
         Button (
             onClick = {},
